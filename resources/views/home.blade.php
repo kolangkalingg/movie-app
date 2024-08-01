@@ -16,7 +16,7 @@
         {{-- end header section --}}
 
         {{-- banner section --}}
-        <div class="w-full h-[512px] flex flex-col relative bg-black">
+        <div class="w-full h-[700px] flex flex-col relative bg-black">
             @foreach ($banner as $bannerItem)
                 {{-- banner image section --}}
                 <div class="flex flex-row items-center w-full h-full relative slide ">
@@ -122,18 +122,28 @@
     <div class="mt-12">
         <span class="font-inter font-bold text-xl ml-20">Top 10 Movies</span>
         <div class="w-auto flex flex-row overflow-x-auto pl-28 pt-6 pb-10">
-            @foreach ( $loopMovies as $movieItem )          
-            <a href="" class="group">
+            @foreach ( $loopMovies as $movieItem )
+            @php
+            $original_date = $movieItem->release_date;
+            $timestamp = strtotime($original_date);
+            $movieYear = date("Y", $timestamp);
+
+            $movieID = $movieItem->id;
+            $movieTitle = $movieItem->title;
+            $movieRating = $movieItem->vote_average;
+            $movieImage = "{$imageBaseURL}/w400{$movieItem->poster_path}";
+        @endphp
+            <a href="movie/{{$movieID}}" class="group">
                 <div
                     class="min-w-[232px] min-h-[428px] bg-white drop-shadow-xl
                     group-hover:drop-shadow-[0_0px_8px_rgba(0,0,0,0.5)] rounded-[32px]
                      p-5 flex flex-col mr-8 duration-100">
                     <div class="rounded-[32px] overflow-hidden">
-                        <img src="http://via.placeholder.com/232x300" alt=""
-                            class="w-full h-[300px] rounded-[32px] group-hover:scale-150 duration-200">
+                        <img src="{{$movieImage}}" alt=""
+                            class="w-full h-[300px] rounded-[32px] group-hover:scale-125 duration-200">
                     </div>
-                    <span class="font-inter font-bold text-xl mt-5 line-clamp-1 group-hover:line-clamp-none">title</span>
-                    <span class="font-inter font-bold text-sm mt-1 ">2024</span>
+                    <span class="font-inter font-bold text-xl mt-5 line-clamp-1 group-hover:line-clamp-none">{{$movieTitle}}</span>
+                    <span class="font-inter font-bold text-sm mt-1 ">{{$movieYear}}</span>
                     <div class="item-center flex flex-row mt-1">
                         <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" width="24" height="24">
                             <style type="text/css">
@@ -144,7 +154,7 @@
                             <path class="st0" d="M11,24V14H5v12h6v-2.4l0,0c1.5,1.6,4.1,2.4,6.2,2.4h6.5c1.1,0,2.1-0.8,2.3-2l1.5-8.6c0.3-1.5-0.9-2.4-2.3-2.4
                                 H20V6.4C20,5.1,18.7,4,17.4,4h0C16.1,4,15,5.1,15,6.4v0c0,1.6-0.5,3.1-1.4,4.4L11,13.8"></path>
                             </svg>
-                        <span class="font-inter text-sm mt-1">80%</span>
+                        <span class="font-inter text-sm mt-1">{{$movieRating}}</span>
                     </div>
                 </div>
             </a>
