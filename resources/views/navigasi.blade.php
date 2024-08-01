@@ -1,5 +1,5 @@
  {{-- header section --}}
-<div class="w-full bg-white h-[96px] drop-shadow-lg flex flex-row items-center">
+<div class="w-full bg-white h-[78px] drop-shadow-lg flex flex-row items-center">
     <div class="w-1/3 pl-5">
         <a href=""
             class="uppecase text-base mx-5 text-black font-inter hover:text-develobe-500 duration-200 font-bold">Movies</a>
